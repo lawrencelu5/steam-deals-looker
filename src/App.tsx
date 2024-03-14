@@ -1,12 +1,5 @@
 import { useState } from "react";
-import {
-  Center,
-  Heading,
-  Flex,
-  Spinner,
-  HStack,
-  Stack,
-} from "@chakra-ui/react";
+import { Center, Heading, Flex, Spinner, Stack } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import deals from "./service/deals";
 import GameDealsContainer from "./components/GameDeals/GameDealsContainer";
@@ -15,7 +8,7 @@ import GameFilter from "./components/GameFilter/GameFilter";
 function App() {
   const [gameNameFilter, setGameNameFilter] = useState(String);
 
-  const { isLoading, isError, data, error } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ["gameDeals"],
     queryFn: () => deals.getAll(),
   });

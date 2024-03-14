@@ -1,4 +1,4 @@
-import { HStack, Input, Select, Stack } from "@chakra-ui/react";
+import { HStack, Input, Stack } from "@chakra-ui/react";
 
 type Props = {
   setGameName: React.Dispatch<React.SetStateAction<string>>;
