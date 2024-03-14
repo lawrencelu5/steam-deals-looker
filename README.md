@@ -1,30 +1,46 @@
-# React + TypeScript + Vite
+**README**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Name
 
-Currently, two official plugins are available:
+Steam Deals Looker
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
 
-## Expanding the ESLint configuration
+This hobby/practice project allows me to look up steam games on sale (if any) by displaying all games on the page.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Currently, this project uses:
 
-- Configure the top-level `parserOptions` property like this:
+1. [Framer Motion](https://www.framer.com/motion/)
+2. [Chakra UI](https://chakra-ui.com/)
+3. [Emotion CSS](https://emotion.sh/docs/introduction)
+4. [Tanstack Query](https://tanstack.com/query/latest)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Table of Contents
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Contributing](#contributing)
+4. [License](#license)
+
+## Installation
+
+1. Clone the repo
+2. run `npm install` in the cloned repo
+3. run `npm run dev`
+
+## Usage
+
+Open the website and browse what games are on sale. You can use the search bar to filter out games.
+![Picture of site](image.png)
+
+## Contributing
+
+If you see anything that needs to be changed, feel free to say anything! Or contribute!
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Disclaimer
+
+As this is a learning project on how to use Typescript & the mentioned packages above, this project won't see much updates.

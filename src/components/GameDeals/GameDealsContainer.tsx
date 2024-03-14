@@ -1,6 +1,6 @@
 import { Link, SimpleGrid } from "@chakra-ui/react";
 import { lazy } from "react";
-import GameCard from "./GameCard";
+import GameCard from "./GameCard/GameCard";
 import { GameDeals } from "./GameDeals";
 import { AnimatePresence, motion } from "framer-motion";
 
