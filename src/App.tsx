@@ -1,19 +1,43 @@
-import { useState } from "react";
-import { Center, Heading, Flex, Spinner, Stack } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
+import { useState, useEffect } from "react";
+import {
+  Center,
+  Heading,
+  Flex,
+  Spinner,
+  Stack,
+  Button,
+  HStack,
+  ButtonGroup,
+} from "@chakra-ui/react";
+import {
+  useQuery,
+  keepPreviousData,
+  useQueryClient,
+} from "@tanstack/react-query";
 import deals from "./service/deals";
 import GameDealsContainer from "./components/GameDeals/GameDealsContainer";
 import GameFilter from "./components/GameFilter/GameFilter";
 
 function App() {
+  const queryClient = useQueryClient();
   const [gameNameFilter, setGameNameFilter] = useState(String);
+  const [page, setPage] = useState(0);
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["gameDeals"],
-    queryFn: () => deals.getAll(),
+  const { isLoading, data, isPlaceholderData } = useQuery({
+    queryKey: ["gameDeals", page],
+    queryFn: () => deals.getAll(page),
+    placeholderData: keepPreviousData,
+    staleTime: 5000,
   });
 
-  console.log(data);
+  useEffect(() => {
+    if (!isPlaceholderData && data && data[1]) {
+      queryClient.prefetchQuery({
+        queryKey: ["gameDeals", page + 1],
+        queryFn: () => deals.getAll(page + 1),
+      });
+    }
+  }, [data, isPlaceholderData, page, queryClient]);
 
   return (
     <Flex
@@ -29,6 +53,25 @@ function App() {
           </Heading>
         </Center>
         <GameFilter gameName={gameNameFilter} setGameName={setGameNameFilter} />
+        <HStack justify={"center"}>
+          <ButtonGroup gap="4">
+            <Button
+              onClick={() => setPage((old) => Math.max(old - 1, 0))}
+              disabled={page === 0}
+            >
+              Previous Page
+            </Button>
+            <Button isDisabled={true}>{page}</Button>
+            <Button
+              onClick={() => {
+                setPage((old) => (data && data[1] ? old + 1 : old));
+              }}
+              isDisabled={isPlaceholderData || !(data && data[1])}
+            >
+              Next Page
+            </Button>
+          </ButtonGroup>
+        </HStack>
         {isLoading ? (
           <Center>
             <Spinner
@@ -43,10 +86,11 @@ function App() {
           <GameDealsContainer
             dealsArray={
               gameNameFilter
-                ? data?.filter((game) =>
+                ? data &&
+                  data[0]?.filter((game) =>
                     game.title.toLowerCase().match(gameNameFilter.toLowerCase())
                   )
-                : data
+                : data && data[0]
             }
           />
         )}
