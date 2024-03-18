@@ -7,6 +7,7 @@ function GameCardImage({ gameInfo }: { gameInfo: GameDeals }) {
       <Img
         borderRadius="lg"
         objectFit="fill"
+        maxW={"150px"}
         src={gameInfo.thumb}
         alt={gameInfo.title + " thumbnail"}
         loading="lazy"
