@@ -1,10 +1,4 @@
-import {
-  Button,
-  ButtonGroup,
-  FormControl,
-  HStack,
-  Input,
-} from "@chakra-ui/react";
+import { Button, ButtonGroup, HStack, Input } from "@chakra-ui/react";
 import { useState } from "react";
 
 type Props = {
