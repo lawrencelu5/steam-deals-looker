@@ -1,14 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Center,
-  Heading,
-  Flex,
-  Spinner,
-  Stack,
-  Button,
-  HStack,
-  ButtonGroup,
-} from "@chakra-ui/react";
+import { Center, Heading, Flex, Spinner, Stack } from "@chakra-ui/react";
 import {
   useQuery,
   keepPreviousData,
@@ -17,6 +8,7 @@ import {
 import deals from "./service/deals";
 import GameDealsContainer from "./components/GameDeals/GameDealsContainer";
 import GameFilter from "./components/GameFilter/GameFilter";
+import GamePagination from "./components/Pagination/GamePagination";
 
 function App() {
   const queryClient = useQueryClient();
@@ -53,25 +45,15 @@ function App() {
           </Heading>
         </Center>
         <GameFilter gameName={gameNameFilter} setGameName={setGameNameFilter} />
-        <HStack justify={"center"}>
-          <ButtonGroup gap="4">
-            <Button
-              onClick={() => setPage((old) => Math.max(old - 1, 0))}
-              disabled={page === 0}
-            >
-              Previous Page
-            </Button>
-            <Button isDisabled={true}>{page}</Button>
-            <Button
-              onClick={() => {
-                setPage((old) => (data && data[1] ? old + 1 : old));
-              }}
-              isDisabled={isPlaceholderData || !(data && data[1])}
-            >
-              Next Page
-            </Button>
-          </ButtonGroup>
-        </HStack>
+        {data && (
+          <GamePagination
+            page={page}
+            setPage={setPage}
+            isPlaceholderData={isPlaceholderData}
+            hasMore={data[1]}
+            maxPage={data[2]}
+          />
+        )}
         {isLoading ? (
           <Center>
             <Spinner
